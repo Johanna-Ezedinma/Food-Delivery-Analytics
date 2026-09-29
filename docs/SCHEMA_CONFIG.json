@@ -1,0 +1,1424 @@
+{
+  "schema_version": "1.0",
+  "theme": "Golden Wok Delivery Radius and Urban Traffic Friction Matrix",
+  "allowed_value_sets": {
+    "dim_kitchen_kitchen_name": {
+      "column_name": "dim_kitchen_kitchen_name",
+      "table_name": "dim",
+      "values": [
+        "Golden Wok Yaba",
+        "Golden Wok Lekki",
+        "Golden Wok Ikeja",
+        "Golden Wok Surulere"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Dark kitchen locations operating across Lagos for Golden Wok brand"
+      }
+    },
+    "dim_kitchen_kitchen_zone": {
+      "column_name": "dim_kitchen_kitchen_zone",
+      "table_name": "dim",
+      "values": [
+        "Yaba",
+        "Lekki",
+        "Ikeja",
+        "Surulere"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Lagos neighbourhood where each dark kitchen is physically located"
+      }
+    },
+    "dim_kitchen_kitchen_status": {
+      "column_name": "dim_kitchen_kitchen_status",
+      "table_name": "dim",
+      "values": [
+        "Active",
+        "Temporarily Closed",
+        "Decommissioned"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Operational status of each kitchen at time of order"
+      }
+    },
+    "dim_kitchen_cuisine_speciality": {
+      "column_name": "dim_kitchen_cuisine_speciality",
+      "table_name": "dim",
+      "values": [
+        "Full Menu",
+        "Noodles & Rice Focus",
+        "Dim Sum Focus",
+        "Grill & Wok Focus"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Primary menu emphasis of each kitchen node for capacity planning"
+      }
+    },
+    "dim_delivery_zone_zone_name": {
+      "column_name": "dim_delivery_zone_zone_name",
+      "table_name": "dim",
+      "values": [
+        "Yaba",
+        "Lekki Phase 1",
+        "Lekki Phase 2",
+        "Ikeja",
+        "Surulere",
+        "Victoria Island",
+        "Ikoyi",
+        "Ajah",
+        "Gbagada",
+        "Maryland",
+        "Magodo",
+        "Ojodu Berger",
+        "Festac",
+        "Agege",
+        "Mushin",
+        "Oshodi",
+        "Apapa",
+        "Lagos Island",
+        "Ikorodu",
+        "Sangotedo"
+      ],
+      "hierarchy": {
+        "Mainland": [
+          "Yaba",
+          "Surulere",
+          "Mushin",
+          "Oshodi",
+          "Festac",
+          "Agege",
+          "Gbagada",
+          "Maryland",
+          "Ojodu Berger",
+          "Ikorodu"
+        ],
+        "Island": [
+          "Lekki Phase 1",
+          "Lekki Phase 2",
+          "Victoria Island",
+          "Ikoyi",
+          "Ajah",
+          "Lagos Island",
+          "Sangotedo"
+        ],
+        "Ikeja Corridor": [
+          "Ikeja",
+          "Maryland",
+          "Magodo",
+          "Ojodu Berger"
+        ],
+        "Apapa Corridor": [
+          "Apapa",
+          "Festac"
+        ]
+      },
+      "metadata": {
+        "description": "All delivery destination zones served by Golden Wok across Lagos; grouped by geographic corridor for corridor-level P&L analysis"
+      }
+    },
+    "dim_delivery_zone_zone_tier": {
+      "column_name": "dim_delivery_zone_zone_tier",
+      "table_name": "dim",
+      "values": [
+        "Tier 1 - Core",
+        "Tier 2 - Extended",
+        "Tier 3 - Fringe"
+      ],
+      "hierarchy": {
+        "Tier 1 - Core": [
+          "Yaba",
+          "Surulere",
+          "Ikeja",
+          "Lekki Phase 1",
+          "Victoria Island",
+          "Ikoyi",
+          "Lagos Island",
+          "Gbagada",
+          "Maryland"
+        ],
+        "Tier 2 - Extended": [
+          "Lekki Phase 2",
+          "Magodo",
+          "Ojodu Berger",
+          "Oshodi",
+          "Mushin",
+          "Festac",
+          "Ajah",
+          "Sangotedo"
+        ],
+        "Tier 3 - Fringe": [
+          "Ikorodu",
+          "Agege",
+          "Apapa"
+        ]
+      },
+      "metadata": {
+        "description": "Profitability and reachability tier classification for delivery zones; Tier 3 fringe zones are candidates for radius restriction analysis"
+      }
+    },
+    "dim_delivery_zone_traffic_hotspot_flag": {
+      "column_name": "dim_delivery_zone_traffic_hotspot_flag",
+      "table_name": "dim",
+      "values": [
+        "High Hotspot",
+        "Moderate Hotspot",
+        "Low Hotspot",
+        "No Hotspot"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Categorical flag for whether the delivery zone falls within a known Lagos go-slow corridor; used to cross-reference with traffic friction score"
+      }
+    },
+    "dim_time_slot_slot_label": {
+      "column_name": "dim_time_slot_slot_label",
+      "table_name": "dim",
+      "values": [
+        "Early Morning (06:00-08:59)",
+        "Morning Rush (09:00-11:59)",
+        "Lunch Peak (12:00-13:59)",
+        "Afternoon Lull (14:00-16:59)",
+        "Evening Rush (17:00-19:59)",
+        "Dinner Peak (20:00-21:59)",
+        "Late Night (22:00-23:59)",
+        "Overnight (00:00-05:59)"
+      ],
+      "hierarchy": {
+        "Rush Hour Windows": [
+          "Morning Rush (09:00-11:59)",
+          "Evening Rush (17:00-19:59)"
+        ],
+        "Peak Demand Windows": [
+          "Lunch Peak (12:00-13:59)",
+          "Dinner Peak (20:00-21:59)"
+        ],
+        "Off-Peak Windows": [
+          "Early Morning (06:00-08:59)",
+          "Afternoon Lull (14:00-16:59)",
+          "Late Night (22:00-23:59)",
+          "Overnight (00:00-05:59)"
+        ]
+      },
+      "metadata": {
+        "description": "Named time windows for each order; critical for correlating Lagos go-slow patterns with delivery time variance and kitchen prioritisation rules"
+      }
+    },
+    "dim_time_slot_day_of_week": {
+      "column_name": "dim_time_slot_day_of_week",
+      "table_name": "dim",
+      "values": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "hierarchy": {
+        "Weekday": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "Weekend": [
+          "Saturday",
+          "Sunday"
+        ]
+      },
+      "metadata": {
+        "description": "Day of week for traffic pattern stratification; weekday rush hours are structurally worse for go-slow impact"
+      }
+    },
+    "dim_time_slot_is_public_holiday": {
+      "column_name": "dim_time_slot_is_public_holiday",
+      "table_name": "dim",
+      "values": [
+        "Yes",
+        "No"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Flag for Nigerian public holidays; traffic patterns diverge significantly from weekday norms on these dates"
+      }
+    },
+    "dim_rider_rider_status": {
+      "column_name": "dim_rider_rider_status",
+      "table_name": "dim",
+      "values": [
+        "Active",
+        "On Leave",
+        "Suspended",
+        "Churned"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Current operational status of the rider at time of order assignment"
+      }
+    },
+    "dim_rider_vehicle_type": {
+      "column_name": "dim_rider_vehicle_type",
+      "table_name": "dim",
+      "values": [
+        "Motorcycle",
+        "Bicycle",
+        "Electric Motorcycle",
+        "Car"
+      ],
+      "hierarchy": {
+        "Motorised": [
+          "Motorcycle",
+          "Electric Motorcycle",
+          "Car"
+        ],
+        "Non-Motorised": [
+          "Bicycle"
+        ]
+      },
+      "metadata": {
+        "description": "Rider vehicle type; motorcycles dominate Lagos last-mile delivery and behave differently in go-slow vs. car-based delivery"
+      }
+    },
+    "dim_rider_home_zone": {
+      "column_name": "dim_rider_home_zone",
+      "table_name": "dim",
+      "values": [
+        "Yaba",
+        "Lekki Phase 1",
+        "Lekki Phase 2",
+        "Ikeja",
+        "Surulere",
+        "Victoria Island",
+        "Ikoyi",
+        "Ajah",
+        "Gbagada",
+        "Maryland",
+        "Magodo",
+        "Ojodu Berger",
+        "Festac",
+        "Agege",
+        "Mushin",
+        "Oshodi",
+        "Apapa",
+        "Lagos Island",
+        "Ikorodu",
+        "Sangotedo"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Rider home base zone; used to compute repositioning cost and correlate rider proximity with kitchen assignment efficiency"
+      }
+    },
+    "dim_rider_experience_band": {
+      "column_name": "dim_rider_experience_band",
+      "table_name": "dim",
+      "values": [
+        "New (0-3 months)",
+        "Developing (3-12 months)",
+        "Experienced (1-3 years)",
+        "Senior (3+ years)"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Rider tenure band; experienced riders show better navigation of Lagos go-slow and higher food temperature scores"
+      }
+    },
+    "fact_orders_weather_condition": {
+      "column_name": "fact_orders_weather_condition",
+      "table_name": "fact",
+      "values": [
+        "Clear",
+        "Cloudy",
+        "Light Rain",
+        "Heavy Rain",
+        "Thunderstorm",
+        "Harmattan Haze"
+      ],
+      "hierarchy": {
+        "Dry Conditions": [
+          "Clear",
+          "Cloudy",
+          "Harmattan Haze"
+        ],
+        "Wet Conditions": [
+          "Light Rain",
+          "Heavy Rain",
+          "Thunderstorm"
+        ]
+      },
+      "metadata": {
+        "description": "Weather at time of order dispatch; rain dramatically worsens traffic friction in Lagos and correlates with cold food arrival; Harmattan Haze is dry-season dust condition unique to West Africa"
+      }
+    },
+    "fact_orders_order_status": {
+      "column_name": "fact_orders_order_status",
+      "table_name": "fact",
+      "values": [
+        "Delivered",
+        "Cancelled - Customer",
+        "Cancelled - Kitchen",
+        "Failed Delivery",
+        "Partially Delivered",
+        "Refunded"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Final order disposition; Failed Delivery and Refunded statuses carry full delivery cost with zero revenue recovery"
+      }
+    },
+    "fact_orders_dish_category": {
+      "column_name": "fact_orders_dish_category",
+      "table_name": "fact",
+      "values": [
+        "Noodles",
+        "Rice Dishes",
+        "Dim Sum & Dumplings",
+        "Grilled & Wok Mains",
+        "Soups & Broths",
+        "Beverages & Extras"
+      ],
+      "hierarchy": {
+        "Temperature-Sensitive": [
+          "Noodles",
+          "Dim Sum & Dumplings",
+          "Soups & Broths"
+        ],
+        "More-Resilient": [
+          "Rice Dishes",
+          "Grilled & Wok Mains",
+          "Beverages & Extras"
+        ]
+      },
+      "metadata": {
+        "description": "Primary dish category of the order; temperature-sensitive categories (crispy noodles, dumplings) show disproportionate quality degradation in long delivery times"
+      }
+    },
+    "fact_orders_pricing_tier_applied": {
+      "column_name": "fact_orders_pricing_tier_applied",
+      "table_name": "fact",
+      "values": [
+        "Standard",
+        "Distance Surcharge - Tier 2",
+        "Distance Surcharge - Tier 3",
+        "Promotional Discount",
+        "Peak Surge Pricing"
+      ],
+      "hierarchy": null,
+      "metadata": {
+        "description": "Pricing rule applied at checkout; used to evaluate whether dynamic or zone-based pricing adjustments improve corridor profitability"
+      }
+    }
+  },
+  "relationship_rules": {
+    "rel_001": {
+      "relationship_id": "rel_001",
+      "from_table": "fact_orders",
+      "from_column": "kitchen_id",
+      "to_table": "dim_kitchen",
+      "to_column": "kitchen_id",
+      "cardinality": "many_to_one",
+      "required_attributes": [
+        "kitchen_id",
+        "kitchen_name",
+        "kitchen_zone",
+        "kitchen_lat",
+        "kitchen_lon"
+      ]
+    },
+    "rel_002": {
+      "relationship_id": "rel_002",
+      "from_table": "fact_orders",
+      "from_column": "delivery_zone_id",
+      "to_table": "dim_delivery_zone",
+      "to_column": "zone_id",
+      "cardinality": "many_to_one",
+      "required_attributes": [
+        "zone_id",
+        "zone_name",
+        "zone_tier",
+        "zone_centroid_lat",
+        "zone_centroid_lon",
+        "traffic_hotspot_flag"
+      ]
+    },
+    "rel_003": {
+      "relationship_id": "rel_003",
+      "from_table": "fact_orders",
+      "from_column": "time_slot_id",
+      "to_table": "dim_time_slot",
+      "to_column": "time_slot_id",
+      "cardinality": "many_to_one",
+      "required_attributes": [
+        "time_slot_id",
+        "slot_label",
+        "day_of_week",
+        "is_rush_hour",
+        "is_public_holiday"
+      ]
+    },
+    "rel_004": {
+      "relationship_id": "rel_004",
+      "from_table": "fact_orders",
+      "from_column": "rider_id",
+      "to_table": "dim_rider",
+      "to_column": "rider_id",
+      "cardinality": "many_to_one",
+      "required_attributes": [
+        "rider_id",
+        "vehicle_type",
+        "experience_band",
+        "home_zone"
+      ]
+    },
+    "rel_005": {
+      "relationship_id": "rel_005",
+      "from_table": "dim_kitchen",
+      "from_column": "kitchen_zone",
+      "to_table": "dim_delivery_zone",
+      "to_column": "zone_name",
+      "cardinality": "one_to_many",
+      "required_attributes": [
+        "zone_name",
+        "zone_centroid_lat",
+        "zone_centroid_lon"
+      ]
+    },
+    "rel_006": {
+      "relationship_id": "rel_006",
+      "from_table": "dim_rider",
+      "from_column": "home_zone",
+      "to_table": "dim_delivery_zone",
+      "to_column": "zone_name",
+      "cardinality": "many_to_one",
+      "required_attributes": [
+        "zone_name"
+      ]
+    },
+    "rel_007": {
+      "relationship_id": "rel_007",
+      "from_table": "fact_orders",
+      "from_column": "kitchen_id",
+      "to_table": "dim_time_slot",
+      "to_column": "time_slot_id",
+      "cardinality": "many_to_many",
+      "required_attributes": [
+        "kitchen_id",
+        "time_slot_id",
+        "slot_label",
+        "is_rush_hour"
+      ]
+    }
+  },
+  "column_constraints": {
+    "dim_kitchen_kitchen_id": {
+      "column_name": "dim_kitchen_kitchen_id",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": true,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "KIT-YB-001",
+        "KIT-LK-001",
+        "KIT-IK-001",
+        "KIT-SU-001"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_kitchen_kitchen_name": {
+      "column_name": "dim_kitchen_kitchen_name",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": true,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Golden Wok Yaba",
+        "Golden Wok Lekki",
+        "Golden Wok Ikeja",
+        "Golden Wok Surulere"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_kitchen_kitchen_zone": {
+      "column_name": "dim_kitchen_kitchen_zone",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Yaba",
+        "Lekki",
+        "Ikeja",
+        "Surulere"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_kitchen_kitchen_lat": {
+      "column_name": "dim_kitchen_kitchen_lat",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 6.3896,
+      "max_value": 6.7,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": {
+        "lat_min": 6.3896,
+        "lat_max": 6.7,
+        "lon_min": 3.15,
+        "lon_max": 3.72,
+        "description": "Bounding box for Lagos metropolitan area; all kitchen coordinates must fall within this polygon"
+      }
+    },
+    "dim_kitchen_kitchen_lon": {
+      "column_name": "dim_kitchen_kitchen_lon",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 3.15,
+      "max_value": 3.72,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": {
+        "lat_min": 6.3896,
+        "lat_max": 6.7,
+        "lon_min": 3.15,
+        "lon_max": 3.72,
+        "description": "Bounding box for Lagos metropolitan area"
+      }
+    },
+    "dim_kitchen_kitchen_status": {
+      "column_name": "dim_kitchen_kitchen_status",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Active",
+        "Temporarily Closed",
+        "Decommissioned"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_kitchen_max_daily_order_capacity": {
+      "column_name": "dim_kitchen_max_daily_order_capacity",
+      "table_name": "dim",
+      "data_type": "integer",
+      "nullable": false,
+      "unique": false,
+      "min_value": 50,
+      "max_value": 500,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_kitchen_cuisine_speciality": {
+      "column_name": "dim_kitchen_cuisine_speciality",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Full Menu",
+        "Noodles & Rice Focus",
+        "Dim Sum Focus",
+        "Grill & Wok Focus"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_kitchen_monthly_fixed_cost_ngn": {
+      "column_name": "dim_kitchen_monthly_fixed_cost_ngn",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 500000,
+      "max_value": 5000000,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_delivery_zone_zone_id": {
+      "column_name": "dim_delivery_zone_zone_id",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": true,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_delivery_zone_zone_name": {
+      "column_name": "dim_delivery_zone_zone_name",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": true,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Yaba",
+        "Lekki Phase 1",
+        "Lekki Phase 2",
+        "Ikeja",
+        "Surulere",
+        "Victoria Island",
+        "Ikoyi",
+        "Ajah",
+        "Gbagada",
+        "Maryland",
+        "Magodo",
+        "Ojodu Berger",
+        "Festac",
+        "Agege",
+        "Mushin",
+        "Oshodi",
+        "Apapa",
+        "Lagos Island",
+        "Ikorodu",
+        "Sangotedo"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_delivery_zone_zone_tier": {
+      "column_name": "dim_delivery_zone_zone_tier",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Tier 1 - Core",
+        "Tier 2 - Extended",
+        "Tier 3 - Fringe"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_delivery_zone_zone_centroid_lat": {
+      "column_name": "dim_delivery_zone_zone_centroid_lat",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 6.3896,
+      "max_value": 6.7,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": {
+        "lat_min": 6.3896,
+        "lat_max": 6.7,
+        "lon_min": 3.15,
+        "lon_max": 3.72,
+        "description": "Lagos metropolitan bounding box; zone centroids must fall within Lagos boundaries"
+      }
+    },
+    "dim_delivery_zone_zone_centroid_lon": {
+      "column_name": "dim_delivery_zone_zone_centroid_lon",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 3.15,
+      "max_value": 3.72,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": {
+        "lat_min": 6.3896,
+        "lat_max": 6.7,
+        "lon_min": 3.15,
+        "lon_max": 3.72,
+        "description": "Lagos metropolitan bounding box"
+      }
+    },
+    "dim_delivery_zone_average_zone_income_band": {
+      "column_name": "dim_delivery_zone_average_zone_income_band",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": true,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Low",
+        "Mid",
+        "High",
+        "Premium"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_delivery_zone_traffic_hotspot_flag": {
+      "column_name": "dim_delivery_zone_traffic_hotspot_flag",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "High Hotspot",
+        "Moderate Hotspot",
+        "Low Hotspot",
+        "No Hotspot"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_delivery_zone_estimated_population_density": {
+      "column_name": "dim_delivery_zone_estimated_population_density",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": true,
+      "unique": false,
+      "min_value": 1000,
+      "max_value": 75000,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_time_slot_time_slot_id": {
+      "column_name": "dim_time_slot_time_slot_id",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": true,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_time_slot_slot_label": {
+      "column_name": "dim_time_slot_slot_label",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Early Morning (06:00-08:59)",
+        "Morning Rush (09:00-11:59)",
+        "Lunch Peak (12:00-13:59)",
+        "Afternoon Lull (14:00-16:59)",
+        "Evening Rush (17:00-19:59)",
+        "Dinner Peak (20:00-21:59)",
+        "Late Night (22:00-23:59)",
+        "Overnight (00:00-05:59)"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_time_slot_day_of_week": {
+      "column_name": "dim_time_slot_day_of_week",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_time_slot_is_rush_hour": {
+      "column_name": "dim_time_slot_is_rush_hour",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Yes",
+        "No"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_time_slot_is_public_holiday": {
+      "column_name": "dim_time_slot_is_public_holiday",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Yes",
+        "No"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_time_slot_slot_start_hour": {
+      "column_name": "dim_time_slot_slot_start_hour",
+      "table_name": "dim",
+      "data_type": "integer",
+      "nullable": false,
+      "unique": false,
+      "min_value": 0,
+      "max_value": 23,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_time_slot_slot_end_hour": {
+      "column_name": "dim_time_slot_slot_end_hour",
+      "table_name": "dim",
+      "data_type": "integer",
+      "nullable": false,
+      "unique": false,
+      "min_value": 0,
+      "max_value": 23,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_time_slot_typical_friction_multiplier": {
+      "column_name": "dim_time_slot_typical_friction_multiplier",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 1.0,
+      "max_value": 4.5,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_rider_rider_id": {
+      "column_name": "dim_rider_rider_id",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": true,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_rider_rider_status": {
+      "column_name": "dim_rider_rider_status",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Active",
+        "On Leave",
+        "Suspended",
+        "Churned"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_rider_vehicle_type": {
+      "column_name": "dim_rider_vehicle_type",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Motorcycle",
+        "Bicycle",
+        "Electric Motorcycle",
+        "Car"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_rider_home_zone": {
+      "column_name": "dim_rider_home_zone",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Yaba",
+        "Lekki Phase 1",
+        "Lekki Phase 2",
+        "Ikeja",
+        "Surulere",
+        "Victoria Island",
+        "Ikoyi",
+        "Ajah",
+        "Gbagada",
+        "Maryland",
+        "Magodo",
+        "Ojodu Berger",
+        "Festac",
+        "Agege",
+        "Mushin",
+        "Oshodi",
+        "Apapa",
+        "Lagos Island",
+        "Ikorodu",
+        "Sangotedo"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_rider_experience_band": {
+      "column_name": "dim_rider_experience_band",
+      "table_name": "dim",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "New (0-3 months)",
+        "Developing (3-12 months)",
+        "Experienced (1-3 years)",
+        "Senior (3+ years)"
+      ],
+      "geospatial_bounds": null
+    },
+    "dim_rider_average_speed_kmh": {
+      "column_name": "dim_rider_average_speed_kmh",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": true,
+      "unique": false,
+      "min_value": 5.0,
+      "max_value": 60.0,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "dim_rider_daily_cost_ngn": {
+      "column_name": "dim_rider_daily_cost_ngn",
+      "table_name": "dim",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 2000,
+      "max_value": 25000,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_order_id": {
+      "column_name": "fact_orders_order_id",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": true,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_kitchen_id": {
+      "column_name": "fact_orders_kitchen_id",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "KIT-YB-001",
+        "KIT-LK-001",
+        "KIT-IK-001",
+        "KIT-SU-001"
+      ],
+      "geospatial_bounds": null
+    },
+    "fact_orders_delivery_zone_id": {
+      "column_name": "fact_orders_delivery_zone_id",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_time_slot_id": {
+      "column_name": "fact_orders_time_slot_id",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_rider_id": {
+      "column_name": "fact_orders_rider_id",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_order_value_ngn": {
+      "column_name": "fact_orders_order_value_ngn",
+      "table_name": "fact",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 500,
+      "max_value": 150000,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_delivery_fee_charged_ngn": {
+      "column_name": "fact_orders_delivery_fee_charged_ngn",
+      "table_name": "fact",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 0,
+      "max_value": 5000,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_delivery_cost_ngn": {
+      "column_name": "fact_orders_delivery_cost_ngn",
+      "table_name": "fact",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 200,
+      "max_value": 12000,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_delivery_distance_km": {
+      "column_name": "fact_orders_delivery_distance_km",
+      "table_name": "fact",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 0.2,
+      "max_value": 35.0,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_promised_delivery_time_mins": {
+      "column_name": "fact_orders_promised_delivery_time_mins",
+      "table_name": "fact",
+      "data_type": "integer",
+      "nullable": false,
+      "unique": false,
+      "min_value": 15,
+      "max_value": 90,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_actual_delivery_time_mins": {
+      "column_name": "fact_orders_actual_delivery_time_mins",
+      "table_name": "fact",
+      "data_type": "integer",
+      "nullable": false,
+      "unique": false,
+      "min_value": 10,
+      "max_value": 240,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_delivery_delay_mins": {
+      "column_name": "fact_orders_delivery_delay_mins",
+      "table_name": "fact",
+      "data_type": "integer",
+      "nullable": false,
+      "unique": false,
+      "min_value": -30,
+      "max_value": 180,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_traffic_friction_score": {
+      "column_name": "fact_orders_traffic_friction_score",
+      "table_name": "fact",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": 1.0,
+      "max_value": 10.0,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_weather_condition": {
+      "column_name": "fact_orders_weather_condition",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Clear",
+        "Cloudy",
+        "Light Rain",
+        "Heavy Rain",
+        "Thunderstorm",
+        "Harmattan Haze"
+      ],
+      "geospatial_bounds": null
+    },
+    "fact_orders_food_temperature_on_arrival_c": {
+      "column_name": "fact_orders_food_temperature_on_arrival_c",
+      "table_name": "fact",
+      "data_type": "float",
+      "nullable": true,
+      "unique": false,
+      "min_value": 20.0,
+      "max_value": 85.0,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_food_temp_threshold_breach": {
+      "column_name": "fact_orders_food_temp_threshold_breach",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Above Threshold",
+        "Below Threshold",
+        "Borderline"
+      ],
+      "geospatial_bounds": null
+    },
+    "fact_orders_customer_rating": {
+      "column_name": "fact_orders_customer_rating",
+      "table_name": "fact",
+      "data_type": "float",
+      "nullable": true,
+      "unique": false,
+      "min_value": 1.0,
+      "max_value": 5.0,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_order_profitability_ngn": {
+      "column_name": "fact_orders_order_profitability_ngn",
+      "table_name": "fact",
+      "data_type": "float",
+      "nullable": false,
+      "unique": false,
+      "min_value": -15000,
+      "max_value": 80000,
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    },
+    "fact_orders_dish_category": {
+      "column_name": "fact_orders_dish_category",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Noodles",
+        "Rice Dishes",
+        "Dim Sum & Dumplings",
+        "Grilled & Wok Mains",
+        "Soups & Broths",
+        "Beverages & Extras"
+      ],
+      "geospatial_bounds": null
+    },
+    "fact_orders_pricing_tier_applied": {
+      "column_name": "fact_orders_pricing_tier_applied",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Standard",
+        "Distance Surcharge - Tier 2",
+        "Distance Surcharge - Tier 3",
+        "Promotional Discount",
+        "Peak Surge Pricing"
+      ],
+      "geospatial_bounds": null
+    },
+    "fact_orders_order_status": {
+      "column_name": "fact_orders_order_status",
+      "table_name": "fact",
+      "data_type": "string",
+      "nullable": false,
+      "unique": false,
+      "min_value": null,
+      "max_value": null,
+      "format_pattern": null,
+      "allowed_values": [
+        "Delivered",
+        "Cancelled - Customer",
+        "Cancelled - Kitchen",
+        "Failed Delivery",
+        "Partially Delivered",
+        "Refunded"
+      ],
+      "geospatial_bounds": null
+    },
+    "fact_orders_order_timestamp": {
+      "column_name": "fact_orders_order_timestamp",
+      "table_name": "fact",
+      "data_type": "date",
+      "nullable": false,
+      "unique": false,
+      "min_value": "2022-01-01T00:00:00",
+      "max_value": "2099-12-31T23:59:59",
+      "format_pattern": null,
+      "allowed_values": null,
+      "geospatial_bounds": null
+    }
+  },
+  "table_definitions": {
+    "fact_orders": {
+      "type": "fact",
+      "columns": [
+        "order_id",
+        "kitchen_id",
+        "zone_id",
+        "rider_id",
+        "time_slot_id",
+        "order_date",
+        "order_value_ngn",
+        "delivery_distance_km",
+        "promised_delivery_min",
+        "actual_delivery_min",
+        "traffic_friction_score",
+        "food_temp_on_arrival_c",
+        "customer_rating",
+        "delivery_cost_ngn",
+        "order_profit_ngn"
+      ],
+      "primary_key": "order_id"
+    },
+    "dim_kitchen": {
+      "type": "dimension",
+      "columns": [
+        "kitchen_id",
+        "kitchen_name",
+        "lga",
+        "latitude",
+        "longitude",
+        "kitchen_capacity_orders_hr",
+        "date_opened",
+        "is_active"
+      ],
+      "primary_key": "kitchen_id"
+    },
+    "dim_delivery_zone": {
+      "type": "dimension",
+      "columns": [
+        "zone_id",
+        "zone_name",
+        "zone_lga",
+        "zone_tier",
+        "avg_zone_traffic_index",
+        "zone_population_density",
+        "baseline_delivery_min",
+        "is_restricted_zone"
+      ],
+      "primary_key": "zone_id"
+    },
+    "dim_time_slot": {
+      "type": "dimension",
+      "columns": [
+        "time_slot_id",
+        "slot_label",
+        "hour_of_day",
+        "day_of_week",
+        "is_weekend",
+        "is_rush_hour",
+        "meal_period",
+        "weather_condition"
+      ],
+      "primary_key": "time_slot_id"
+    },
+    "dim_rider": {
+      "type": "dimension",
+      "columns": [
+        "rider_id",
+        "rider_name",
+        "assigned_kitchen_id",
+        "vehicle_type",
+        "experience_months",
+        "avg_speed_kmh",
+        "avg_rider_rating",
+        "is_active"
+      ],
+      "primary_key": "rider_id"
+    }
+  }
+}

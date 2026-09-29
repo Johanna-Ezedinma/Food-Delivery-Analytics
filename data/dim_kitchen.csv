@@ -1,0 +1,5 @@
+kitchen_id,kitchen_name,lga,latitude,longitude,kitchen_capacity_orders_hr,date_opened,is_active
+KIT-YB-001,Golden Wok Lekki Phase 1,Yaba,6.574617,3.411576,45,3/21/2023,TRUE
+KIT-SU-001,Golden Wok Surulere Hub,Yaba,6.579352,3.533888,40,4/4/2021,FALSE
+KIT-IK-001,Golden Wok Yaba Central,Ikeja,6.454342,3.47165,40,4/23/2024,FALSE
+KIT-LK-001,Golden Wok Ikeja GRA,Surulere,6.515573,3.511008,30,7/12/2023,TRUE

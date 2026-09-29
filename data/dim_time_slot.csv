@@ -1,0 +1,49 @@
+time_slot_id,slot_label,hour_of_day,day_of_week,is_weekend,is_rush_hour,meal_period,weather_condition
+val_0,20:00-21:00,07:23,Wednesday,TRUE,Yes,Afternoon,Thunderstorm
+val_1,12:00-13:00,08:26,Friday,TRUE,Yes,Early Dinner,Overcast
+val_2,15:00-16:00,04:31,Sunday,TRUE,Yes,Afternoon,Sunny
+val_3,11:00-12:00,02:95,Monday,FALSE,No,Mid-Morning,Thunderstorm
+val_4,11:00-12:00,09:69,Monday,FALSE,No,Breakfast,Humid/Hazy
+val_5,08:00-09:00,04:59,Monday,FALSE,Yes,Dinner,Sunny
+val_6,23:00-00:00,03:15,Tuesday,FALSE,No,Mid-Morning,Light Rain
+val_7,08:00-09:00,04:42,Monday,FALSE,Yes,Afternoon,Harmattan (Dusty)
+val_8,07:00-08:00,00:12,Saturday,FALSE,Yes,Breakfast,Thunderstorm
+val_9,22:00-23:00,03:02,Friday,TRUE,Yes,Lunch,Harmattan (Dusty)
+val_10,15:00-16:00,05:16,Sunday,TRUE,No,Afternoon,Light Rain
+val_11,13:00-14:00,09:19,Saturday,FALSE,Yes,Early Dinner,Overcast
+val_12,19:00-20:00,07:38,Sunday,TRUE,No,Afternoon,Thunderstorm
+val_13,12:00-13:00,07:82,Tuesday,TRUE,Yes,Mid-Morning,Partly Cloudy
+val_14,08:00-09:00,05:45,Wednesday,TRUE,Yes,Late Night,Partly Cloudy
+val_15,19:00-20:00,01:10,Saturday,FALSE,Yes,Afternoon,Heavy Rain
+val_16,09:00-10:00,03:91,Tuesday,TRUE,No,Dinner,Thunderstorm
+val_17,15:00-16:00,09:98,Monday,FALSE,Yes,Early Dinner,Sunny
+val_18,23:00-00:00,00:44,Friday,TRUE,No,Afternoon,Heavy Rain
+val_19,22:00-23:00,08:80,Saturday,TRUE,No,Late Night,Overcast
+val_20,12:00-13:00,06:85,Sunday,TRUE,Yes,Breakfast,Heavy Rain
+val_21,20:00-21:00,02:84,Sunday,TRUE,No,Late Night,Humid/Hazy
+val_22,17:00-18:00,07:78,Monday,FALSE,No,Dinner,Sunny
+val_23,14:00-15:00,08:37,Saturday,TRUE,Yes,Afternoon,Humid/Hazy
+val_24,08:00-09:00,00:43,Saturday,TRUE,Yes,Early Dinner,Light Rain
+val_25,12:00-13:00,01:06,Friday,FALSE,Yes,Afternoon,Harmattan (Dusty)
+val_26,17:00-18:00,06:66,Saturday,FALSE,No,Mid-Morning,Light Rain
+val_27,23:00-00:00,10:00,Saturday,TRUE,Yes,Dinner,Overcast
+val_28,06:00-07:00,00:23,Thursday,FALSE,No,Breakfast,Harmattan (Dusty)
+val_29,18:00-19:00,06:66,Monday,FALSE,No,Mid-Morning,Thunderstorm
+val_30,21:00-22:00,01:36,Thursday,TRUE,No,Afternoon,Partly Cloudy
+val_31,23:00-00:00,06:50,Tuesday,FALSE,Yes,Dinner,Thunderstorm
+val_32,13:00-14:00,06:23,Monday,FALSE,No,Lunch,Harmattan (Dusty)
+val_33,08:00-09:00,00:90,Monday,FALSE,Yes,Lunch,Light Rain
+val_34,10:00-11:00,06:81,Friday,TRUE,Yes,Early Morning,Humid/Hazy
+val_35,21:00-22:00,08:97,Thursday,TRUE,Yes,Early Morning,Thunderstorm
+val_36,21:00-22:00,08:64,Thursday,TRUE,Yes,Early Morning,Overcast
+val_37,17:00-18:00,00:29,Saturday,FALSE,Yes,Early Morning,Sunny
+val_38,08:00-09:00,02:46,Thursday,FALSE,Yes,Dinner,Thunderstorm
+val_39,08:00-09:00,02:41,Friday,TRUE,Yes,Dinner,Partly Cloudy
+val_40,14:00-15:00,04:53,Monday,TRUE,Yes,Dinner,Harmattan (Dusty)
+val_41,16:00-17:00,01:43,Saturday,FALSE,No,Early Morning,Heavy Rain
+val_42,06:00-07:00,08:55,Thursday,FALSE,Yes,Early Morning,Light Rain
+val_43,18:00-19:00,07:77,Tuesday,FALSE,No,Mid-Morning,Partly Cloudy
+val_44,15:00-16:00,08:09,Saturday,TRUE,No,Afternoon,Thunderstorm
+val_45,06:00-07:00,01:98,Saturday,FALSE,No,Mid-Morning,Partly Cloudy
+val_46,07:00-08:00,00:14,Monday,TRUE,No,Lunch,Light Rain
+val_47,14:00-15:00,09:11,Tuesday,FALSE,No,Breakfast,Harmattan (Dusty)

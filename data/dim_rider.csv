@@ -1,0 +1,61 @@
+rider_id,rider_name,assigned_kitchen_id,vehicle_type,experience_months,avg_speed_kmh,avg_rider_rating,is_active
+val_0,Tunde Adeyemi,KIT-LK-001,Electric Motorcycle,44,937.826455,3.751852966,TRUE
+val_1,Jide Martins,KIT-LK-001,Tricycle (Keke),19,571.7280524,2.859743756,TRUE
+val_2,Yusuf Abdullahi,KIT-LK-001,Bicycle,49,473.4894011,2.534840719,FALSE
+val_3,Bayo Adeleke,KIT-IK-001,Motorcycle (Okada),35,266.9756631,3.074140075,TRUE
+val_4,Nnamdi Obi,KIT-SU-001,Bicycle,33,331.5689973,2.829555544,FALSE
+val_5,Adewale Peters,KIT-IK-001,Motorcycle (Okada),11,520.6724025,4.194146684,FALSE
+val_6,Kazeem Bello,KIT-SU-001,Motorcycle (Okada),28,438.9114603,2.804581262,FALSE
+val_7,Segun Adesanya,KIT-LK-001,Motorcycle (Okada),52,21.61207988,3.765824829,TRUE
+val_8,Abiodun Salami,KIT-IK-001,Cargo Motorcycle,2,826.2919242,4.235656089,TRUE
+val_9,Yusuf Abdullahi,KIT-SU-001,Cargo Motorcycle,46,896.1607718,3.952791523,TRUE
+val_10,Ola Balogun,KIT-IK-001,Cargo Motorcycle,30,140.249089,2.999439129,FALSE
+val_11,Tunde Adeyemi,KIT-IK-001,Electric Motorcycle,44,554.0361435,4.510311315,TRUE
+val_12,Femi Adebayo,KIT-YB-001,Cargo Motorcycle,40,108.5757411,4.288517824,TRUE
+val_13,Biodun Fashola,KIT-YB-001,Motorcycle (Okada),26,672.240093,4.34746001,TRUE
+val_14,Kazeem Bello,KIT-YB-001,Tricycle (Keke),19,281.2337838,2.827644379,FALSE
+val_15,Rotimi Ajayi,KIT-YB-001,Electric Motorcycle,38,659.4226347,2.809384509,TRUE
+val_16,Uche Ogbonna,KIT-SU-001,Tricycle (Keke),9,726.9946143,4.818906378,FALSE
+val_17,Kazeem Bello,KIT-IK-001,Motorcycle (Okada),36,768.6474919,3.493945485,TRUE
+val_18,Abiodun Salami,KIT-IK-001,Electric Motorcycle,6,107.740946,3.252371729,TRUE
+val_19,Jide Martins,KIT-SU-001,Cargo Motorcycle,39,916.0118451,3.721460113,TRUE
+val_20,Ifeanyi Okonkwo,KIT-LK-001,Electric Motorcycle,38,230.2139909,4.157160532,FALSE
+val_21,Chidi Obiora,KIT-IK-001,Electric Motorcycle,6,37.41255618,4.889058143,TRUE
+val_22,Bayo Adeleke,KIT-YB-001,Motorcycle (Okada),46,554.8524694,3.216115567,TRUE
+val_23,Abiodun Salami,KIT-LK-001,Bicycle,25,370.9222839,4.812021073,FALSE
+val_24,Tunde Adeyemi,KIT-IK-001,Bicycle,48,829.7897431,2.562148728,FALSE
+val_25,Yusuf Abdullahi,KIT-IK-001,Bicycle,3,808.2514721,3.887995106,FALSE
+val_26,Adewale Peters,KIT-IK-001,Cargo Motorcycle,11,317.1388928,4.084937779,FALSE
+val_27,Segun Adesanya,KIT-IK-001,Cargo Motorcycle,30,952.8993951,2.764743509,TRUE
+val_28,Yusuf Abdullahi,KIT-YB-001,Cargo Motorcycle,12,290.9178381,2.850848993,FALSE
+val_29,Biodun Fashola,KIT-IK-001,Bicycle,20,515.0571292,3.547785798,TRUE
+val_30,Rotimi Ajayi,KIT-LK-001,Tricycle (Keke),40,255.9650906,4.91557978,FALSE
+val_31,Yusuf Abdullahi,KIT-SU-001,Motorcycle (Okada),9,936.04357,3.990106383,FALSE
+val_32,Chidi Obiora,KIT-IK-001,Bicycle,41,164.6078176,4.832558054,FALSE
+val_33,Kelechi Eze,KIT-YB-001,Motorcycle (Okada),7,44.91061939,4.510902289,FALSE
+val_34,Gbenga Oyelaran,KIT-SU-001,Bicycle,11,435.09706,3.668454004,FALSE
+val_35,Nnamdi Obi,KIT-SU-001,Tricycle (Keke),36,992.3755641,4.461908623,FALSE
+val_36,Uche Ogbonna,KIT-LK-001,Bicycle,48,891.6772663,2.54459196,FALSE
+val_37,Ifeanyi Okonkwo,KIT-YB-001,Tricycle (Keke),11,748.6080195,2.772859992,TRUE
+val_38,Segun Adesanya,KIT-SU-001,Electric Motorcycle,18,890.7924909,4.573571537,TRUE
+val_39,Chidera Nwachukwu,KIT-SU-001,Cargo Motorcycle,56,893.4466397,4.492042721,TRUE
+val_40,Samuel Dada,KIT-LK-001,Electric Motorcycle,60,518.8583604,3.081601855,FALSE
+val_41,Rotimi Ajayi,KIT-LK-001,Bicycle,35,315.9290518,3.826923976,TRUE
+val_42,Chukwudi Nwosu,KIT-YB-001,Cargo Motorcycle,27,772.0124321,4.015039552,TRUE
+val_43,Taiwo Olawale,KIT-YB-001,Tricycle (Keke),21,661.6612632,4.669347384,TRUE
+val_44,Adewale Peters,KIT-LK-001,Bicycle,37,373.6577289,4.007767893,FALSE
+val_45,Chidera Nwachukwu,KIT-YB-001,Cargo Motorcycle,36,94.46666806,3.531428923,FALSE
+val_46,Ifeanyi Okonkwo,KIT-LK-001,Bicycle,18,746.7896113,3.435460109,FALSE
+val_47,Chidera Nwachukwu,KIT-SU-001,Cargo Motorcycle,2,262.4605159,3.564705216,TRUE
+val_48,Suleiman Garba,KIT-LK-001,Cargo Motorcycle,10,936.8131505,4.129827564,TRUE
+val_49,Abiodun Salami,KIT-SU-001,Electric Motorcycle,58,240.970575,4.668726579,TRUE
+val_50,Bayo Adeleke,KIT-SU-001,Cargo Motorcycle,26,122.7579324,3.634742205,TRUE
+val_51,Taiwo Olawale,KIT-IK-001,Bicycle,29,831.1126721,3.119598907,TRUE
+val_52,Kelechi Eze,KIT-YB-001,Motorcycle (Okada),29,153.2843166,3.091655907,FALSE
+val_53,Rotimi Ajayi,KIT-IK-001,Motorcycle (Okada),47,179.2683082,4.365035701,FALSE
+val_54,Samuel Dada,KIT-IK-001,Electric Motorcycle,4,599.3827915,4.541421909,FALSE
+val_55,Biodun Fashola,KIT-LK-001,Tricycle (Keke),5,874.5620408,2.7631952,TRUE
+val_56,Chidera Nwachukwu,KIT-LK-001,Motorcycle (Okada),17,196.4346657,2.666397142,TRUE
+val_57,Segun Adesanya,KIT-IK-001,Electric Motorcycle,30,310.3236729,3.986084159,FALSE
+val_58,Chidera Nwachukwu,KIT-SU-001,Cargo Motorcycle,41,777.4048382,2.86543311,TRUE
+val_59,Emeka Okafor,KIT-SU-001,Bicycle,30,971.8264261,4.561660476,TRUE

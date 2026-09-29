@@ -1,0 +1,21 @@
+zone_id,zone_name,zone_lga,zone_tier,avg_zone_traffic_index,zone_population_density,baseline_delivery_min,is_restricted_zone
+val_0,Isolo,Mushin,Tier 3 - Extended Zone,4.028381278536104,Very High,17,False
+val_1,Ajegunle,Ikeja,Tier 1 - Core Zone,5.6228478816910235,Low,36,True
+val_2,Ketu,Eti-Osa,Tier 2 - Adjacent Zone,8.033915763556909,High,12,False
+val_3,Lekki Phase 2,Surulere,Tier 2 - Adjacent Zone,6.524922522312785,Medium,37,True
+val_4,Bariga,Agege,Tier 3 - Extended Zone,7.693817075192496,High,32,True
+val_5,Bariga,Mushin,Tier 2 - Adjacent Zone,5.601961525706199,Low,32,False
+val_6,Shomolu,Mushin,Tier 3 - Extended Zone,6.373465745360679,Low,41,False
+val_7,Ajegunle,Lagos Mainland,Tier 2 - Adjacent Zone,3.718798229204955,Low,34,True
+val_8,Surulere,Shomolu,Tier 2 - Adjacent Zone,7.158677349789238,Low,44,False
+val_9,Anthony Village,Lagos Island,Tier 2 - Adjacent Zone,3.058515367068031,Low,45,False
+val_10,Maryland,Kosofe,Tier 1 - Core Zone,6.8499455919024355,Very High,52,True
+val_11,Shomolu,Kosofe,Tier 3 - Extended Zone,8.127536826109385,High,47,False
+val_12,Ilupeju,Eti-Osa,Tier 1 - Core Zone,2.517191847221888,Medium,34,False
+val_13,Egbeda,Eti-Osa,Tier 2 - Adjacent Zone,6.230724002172782,Medium,33,True
+val_14,Ogudu,Eti-Osa,Tier 4 - Outer Zone,2.2322372613704964,Very High,22,False
+val_15,Magodo,Eti-Osa,Tier 4 - Outer Zone,7.088010337689987,Very High,38,False
+val_16,Ogudu,Lagos Mainland,Tier 3 - Extended Zone,2.1505977849411058,Medium,18,False
+val_17,Egbeda,Surulere,Tier 4 - Outer Zone,8.706736634794819,Medium,52,False
+val_18,Alimosho,Eti-Osa,Tier 4 - Outer Zone,2.5580410612910764,Very High,49,False
+val_19,Ikoyi,Lagos Mainland,Tier 2 - Adjacent Zone,8.883377893499919,Very High,17,True

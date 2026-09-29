@@ -1,0 +1,1181 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "theme": "Golden Wok Delivery Radius and Urban Traffic Friction Matrix",
+    "business": "Golden Wok Cloud Kitchen - Lagos",
+    "complexity": "intermediate",
+    "total_rows": 5000,
+    "description": "Star schema for delivery operations analytics across Lagos dark kitchens"
+  },
+  "global_parameters": {
+    "date_range_start": "2023-01-01",
+    "date_range_end": "2024-12-31",
+    "base_currency": "NGN",
+    "locale": "en_NG",
+    "random_seed": null
+  },
+  "tables": {
+    "fact_orders": {
+      "name": "fact_orders",
+      "table_type": "fact",
+      "grain": "one row per customer delivery order",
+      "row_count": 5000,
+      "primary_key": "order_id",
+      "columns": {
+        "order_id": {
+          "name": "order_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Unique order identifier",
+          "generator": "sequence",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "kitchen_id": {
+          "name": "kitchen_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Source dark kitchen",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "zone_id": {
+          "name": "zone_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Delivery destination zone",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "rider_id": {
+          "name": "rider_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Assigned delivery rider",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "time_slot_id": {
+          "name": "time_slot_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Time-of-day slot key",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "order_date": {
+          "name": "order_date",
+          "data_type": "date",
+          "nullable": false,
+          "unique": false,
+          "description": "Date order was placed",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "order_value_ngn": {
+          "name": "order_value_ngn",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "Gross order revenue NGN",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "normal",
+            "mean": 4800,
+            "std": 1600
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "delivery_distance_km": {
+          "name": "delivery_distance_km",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "Kitchen to door distance",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 0.8,
+            "high": 12.5
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "promised_delivery_min": {
+          "name": "promised_delivery_min",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Quoted delivery minutes",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 25,
+            "high": 45
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "actual_delivery_min": {
+          "name": "actual_delivery_min",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Actual delivery minutes",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "normal",
+            "mean": 52,
+            "std": 18
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "traffic_friction_score": {
+          "name": "traffic_friction_score",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "0-10 congestion severity",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 1.0,
+            "high": 10.0
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "food_temp_on_arrival_c": {
+          "name": "food_temp_on_arrival_c",
+          "data_type": "float",
+          "nullable": true,
+          "unique": false,
+          "description": "Celsius at doorstep",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "normal",
+            "mean": 58,
+            "std": 12
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "customer_rating": {
+          "name": "customer_rating",
+          "data_type": "float",
+          "nullable": true,
+          "unique": false,
+          "description": "1-5 star rating",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 1.0,
+            "high": 5.0
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "delivery_cost_ngn": {
+          "name": "delivery_cost_ngn",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "Rider fuel and time cost",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "normal",
+            "mean": 1200,
+            "std": 400
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "order_profit_ngn": {
+          "name": "order_profit_ngn",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "Profit after delivery cost",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "normal",
+            "mean": 800,
+            "std": 950
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        }
+      },
+      "static_data": false,
+      "seed_data": null,
+      "auto_generate": false,
+      "auto_generate_params": {}
+    },
+    "dim_kitchen": {
+      "name": "dim_kitchen",
+      "table_type": "dimension",
+      "grain": "",
+      "row_count": 4,
+      "primary_key": "kitchen_id",
+      "columns": {
+        "kitchen_id": {
+          "name": "kitchen_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Kitchen surrogate key",
+          "generator": "sequence",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "kitchen_name": {
+          "name": "kitchen_name",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Kitchen location name",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              "Golden Wok Yaba",
+              "Golden Wok Lekki",
+              "Golden Wok Ikeja",
+              "Golden Wok Surulere"
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "lga": {
+          "name": "lga",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Lagos local govt area",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              "Yaba",
+              "Lekki",
+              "Ikeja",
+              "Surulere"
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "latitude": {
+          "name": "latitude",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "Kitchen GPS latitude",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              6.5158,
+              6.4698,
+              6.6018,
+              6.5022
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "longitude": {
+          "name": "longitude",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "Kitchen GPS longitude",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              3.3796,
+              3.5852,
+              3.3515,
+              3.3561
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "kitchen_capacity_orders_hr": {
+          "name": "kitchen_capacity_orders_hr",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Max orders per hour",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 30,
+            "high": 60
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "date_opened": {
+          "name": "date_opened",
+          "data_type": "date",
+          "nullable": false,
+          "unique": false,
+          "description": "Kitchen launch date",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "is_active": {
+          "name": "is_active",
+          "data_type": "boolean",
+          "nullable": false,
+          "unique": false,
+          "description": "Currently operating flag",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              true
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        }
+      },
+      "static_data": false,
+      "seed_data": null,
+      "auto_generate": false,
+      "auto_generate_params": {}
+    },
+    "dim_delivery_zone": {
+      "name": "dim_delivery_zone",
+      "table_type": "dimension",
+      "grain": "",
+      "row_count": 20,
+      "primary_key": "zone_id",
+      "columns": {
+        "zone_id": {
+          "name": "zone_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Zone surrogate key",
+          "generator": "sequence",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "zone_name": {
+          "name": "zone_name",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Delivery zone label",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "zone_lga": {
+          "name": "zone_lga",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Zone local govt area",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "zone_tier": {
+          "name": "zone_tier",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Inner mid or outer ring",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              "Inner",
+              "Mid",
+              "Outer"
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "avg_zone_traffic_index": {
+          "name": "avg_zone_traffic_index",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "Historical congestion index",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 2.0,
+            "high": 9.0
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "zone_population_density": {
+          "name": "zone_population_density",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "High medium or low density",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              "High",
+              "Medium",
+              "Low"
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "baseline_delivery_min": {
+          "name": "baseline_delivery_min",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Typical minutes no traffic",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 15,
+            "high": 55
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "is_restricted_zone": {
+          "name": "is_restricted_zone",
+          "data_type": "boolean",
+          "nullable": false,
+          "unique": false,
+          "description": "Access restriction flag",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        }
+      },
+      "static_data": false,
+      "seed_data": null,
+      "auto_generate": false,
+      "auto_generate_params": {}
+    },
+    "dim_time_slot": {
+      "name": "dim_time_slot",
+      "table_type": "dimension",
+      "grain": "",
+      "row_count": 48,
+      "primary_key": "time_slot_id",
+      "columns": {
+        "time_slot_id": {
+          "name": "time_slot_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Time slot surrogate key",
+          "generator": "sequence",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "slot_label": {
+          "name": "slot_label",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "E.g. 07:30-08:00",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "hour_of_day": {
+          "name": "hour_of_day",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Hour 0 to 23",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 0,
+            "high": 23
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "day_of_week": {
+          "name": "day_of_week",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Monday through Sunday",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "is_weekend": {
+          "name": "is_weekend",
+          "data_type": "boolean",
+          "nullable": false,
+          "unique": false,
+          "description": "Weekend flag",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "is_rush_hour": {
+          "name": "is_rush_hour",
+          "data_type": "boolean",
+          "nullable": false,
+          "unique": false,
+          "description": "AM PM peak flag",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "meal_period": {
+          "name": "meal_period",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Breakfast lunch dinner late",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              "Breakfast",
+              "Lunch",
+              "Dinner",
+              "Late Night"
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "weather_condition": {
+          "name": "weather_condition",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Clear rain harmattan",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              "Clear",
+              "Rain",
+              "Heavy Rain",
+              "Harmattan",
+              "Cloudy"
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        }
+      },
+      "static_data": false,
+      "seed_data": null,
+      "auto_generate": false,
+      "auto_generate_params": {}
+    },
+    "dim_rider": {
+      "name": "dim_rider",
+      "table_type": "dimension",
+      "grain": "",
+      "row_count": 60,
+      "primary_key": "rider_id",
+      "columns": {
+        "rider_id": {
+          "name": "rider_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Rider surrogate key",
+          "generator": "sequence",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "rider_name": {
+          "name": "rider_name",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Rider full name",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "assigned_kitchen_id": {
+          "name": "assigned_kitchen_id",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Primary kitchen base",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "vehicle_type": {
+          "name": "vehicle_type",
+          "data_type": "string",
+          "nullable": false,
+          "unique": false,
+          "description": "Motorcycle or bicycle",
+          "generator": "static",
+          "generator_params": {
+            "values": [
+              "Motorcycle",
+              "Bicycle",
+              "Motorcycle",
+              "Motorcycle"
+            ]
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "experience_months": {
+          "name": "experience_months",
+          "data_type": "integer",
+          "nullable": false,
+          "unique": false,
+          "description": "Months on platform",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "uniform",
+            "low": 1,
+            "high": 48
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "avg_speed_kmh": {
+          "name": "avg_speed_kmh",
+          "data_type": "float",
+          "nullable": false,
+          "unique": false,
+          "description": "Rider average speed",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "normal",
+            "mean": 22,
+            "std": 5
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "avg_rider_rating": {
+          "name": "avg_rider_rating",
+          "data_type": "float",
+          "nullable": true,
+          "unique": false,
+          "description": "Historical rider rating",
+          "generator": "numpy",
+          "generator_params": {
+            "distribution": "normal",
+            "mean": 4.1,
+            "std": 0.5
+          },
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        },
+        "is_active": {
+          "name": "is_active",
+          "data_type": "boolean",
+          "nullable": false,
+          "unique": false,
+          "description": "Currently active rider",
+          "generator": "faker",
+          "generator_params": {},
+          "format_pattern": null,
+          "values": null,
+          "weights": null,
+          "min_value": null,
+          "max_value": null,
+          "precision": null,
+          "formula": null,
+          "null_rate": 0.0
+        }
+      },
+      "static_data": false,
+      "seed_data": null,
+      "auto_generate": false,
+      "auto_generate_params": {}
+    }
+  },
+  "relationships": [
+    {
+      "relationship_id": "",
+      "from_table": "fact_orders",
+      "from_column": "kitchen_id",
+      "to_table": "dim_kitchen",
+      "to_column": "kitchen_id",
+      "relationship_type": "many_to_one",
+      "enforced": true
+    },
+    {
+      "relationship_id": "",
+      "from_table": "fact_orders",
+      "from_column": "zone_id",
+      "to_table": "dim_delivery_zone",
+      "to_column": "zone_id",
+      "relationship_type": "many_to_one",
+      "enforced": true
+    },
+    {
+      "relationship_id": "",
+      "from_table": "fact_orders",
+      "from_column": "rider_id",
+      "to_table": "dim_rider",
+      "to_column": "rider_id",
+      "relationship_type": "many_to_one",
+      "enforced": true
+    },
+    {
+      "relationship_id": "",
+      "from_table": "fact_orders",
+      "from_column": "time_slot_id",
+      "to_table": "dim_time_slot",
+      "to_column": "time_slot_id",
+      "relationship_type": "many_to_one",
+      "enforced": true
+    },
+    {
+      "relationship_id": "",
+      "from_table": "dim_rider",
+      "from_column": "assigned_kitchen_id",
+      "to_table": "dim_kitchen",
+      "to_column": "kitchen_id",
+      "relationship_type": "many_to_one",
+      "enforced": true
+    }
+  ],
+  "narrative_anchors": [
+    {
+      "anchor_id": "",
+      "description": "Orders placed during rush hours (07:00-09:00, 16:30-19:30) to outer-ring zones exceed 90 min actual delivery time, triple promised SLA, and yield average order_profit_ngn below -500.",
+      "target_tables": [],
+      "target_columns": [],
+      "statistical_rule": {},
+      "validation_query": null,
+      "tolerance": 0.05
+    },
+    {
+      "anchor_id": "",
+      "description": "When weather_condition is Rain or Heavy Rain, traffic_friction_score is 1.8x higher and actual_delivery_min increases by ~28 min on average versus Clear days.",
+      "target_tables": [],
+      "target_columns": [],
+      "statistical_rule": {},
+      "validation_query": null,
+      "tolerance": 0.05
+    },
+    {
+      "anchor_id": "",
+      "description": "Orders with delivery_distance_km above 8 km show structurally negative order_profit_ngn regardless of order value, as delivery_cost_ngn rises faster than revenue scales.",
+      "target_tables": [],
+      "target_columns": [],
+      "statistical_rule": {},
+      "validation_query": null,
+      "tolerance": 0.05
+    },
+    {
+      "anchor_id": "",
+      "description": "food_temp_on_arrival_c drops below 45 Celsius for orders where actual_delivery_min exceeds 60, correlated with customer_rating below 2.5.",
+      "target_tables": [],
+      "target_columns": [],
+      "statistical_rule": {},
+      "validation_query": null,
+      "tolerance": 0.05
+    },
+    {
+      "anchor_id": "",
+      "description": "The Lekki kitchen serving VI and Ikoyi zones consistently records negative corridor profitability due to Third Mainland Bridge and Lekki-Epe Expressway congestion compounding delivery costs.",
+      "target_tables": [],
+      "target_columns": [],
+      "statistical_rule": {},
+      "validation_query": null,
+      "tolerance": 0.05
+    }
+  ],
+  "dirty_data_config": {
+    "enabled": true,
+    "difficulty_level": "intermediate",
+    "seed": null,
+    "rules": [
+      {
+        "rule_id": "",
+        "rule_type": "null_injection",
+        "target_table": "",
+        "target_columns": [],
+        "rate": 0.08,
+        "pattern": "random",
+        "parameters": {},
+        "description": ""
+      },
+      {
+        "rule_id": "",
+        "rule_type": "null_injection",
+        "target_table": "",
+        "target_columns": [],
+        "rate": 0.15,
+        "pattern": "random",
+        "parameters": {},
+        "description": ""
+      },
+      {
+        "rule_id": "",
+        "rule_type": "null_injection",
+        "target_table": "",
+        "target_columns": [],
+        "rate": 0.02,
+        "pattern": "random",
+        "parameters": {},
+        "description": ""
+      },
+      {
+        "rule_id": "",
+        "rule_type": "null_injection",
+        "target_table": "",
+        "target_columns": [],
+        "rate": 0.1,
+        "pattern": "random",
+        "parameters": {},
+        "description": ""
+      },
+      {
+        "rule_id": "",
+        "rule_type": "null_injection",
+        "target_table": "",
+        "target_columns": [],
+        "rate": 0.01,
+        "pattern": "random",
+        "parameters": {},
+        "description": ""
+      }
+    ]
+  },
+  "validation_config": {
+    "referential_integrity_enabled": true,
+    "strict_mode": true,
+    "arithmetic_audits": []
+  },
+  "export_config": {
+    "file_formats": [
+      "csv"
+    ],
+    "csv_delimiter": ",",
+    "csv_encoding": "utf-8",
+    "parquet_compression": "snappy",
+    "generate_data_dictionary": true,
+    "generate_challenge_brief": true,
+    "generate_erd": false,
+    "package_format": "zip"
+  }
+}
